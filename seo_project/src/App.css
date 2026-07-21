@@ -1,0 +1,87 @@
+.app {
+  min-height: 100vh;
+  padding: 45px 24px;
+  background: rgb(255, 255, 255);
+  color: #501d1d;
+}
+
+.app-header {
+  max-width: 900px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 10;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #9f0202;
+}
+
+.app-header p {
+  margin-top: 12px;
+  color: #3d0505;
+}
+
+.app-card{
+  max-width: 300;
+  margin: 0 auto;
+  padding: 28px;
+  background: black;
+  border: 1px solid rgb(51, 49, 49);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+}
+
+.planner-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 28px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+}
+
+.planner-card h2 {
+  margin-top: 0;
+  color: #1f2937;
+}
+
+.planner-card p {
+  line-height: 1.6;
+  margin: 10px;
+}
+
+.primary-button {
+  margin-top: 16px;
+  padding: 5px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #1d4ed8;
+}
+
+.primary-button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.primary-input {
+  margin-top: 16px;
+  margin-right: 1px;
+  padding: 5px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #1c2029;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
