@@ -1,87 +1,96 @@
 .app {
+  box-sizing: border-box;
   min-height: 100vh;
-  padding: 45px 24px;
-  background: rgb(255, 255, 255);
-  color: #501d1d;
+  padding: 80px 24px;
+  background-color: #0f172a;
+background-image:
+  linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+background-size: 32px 32px;
+  color: #bfdbfe;
 }
 
 .app-header {
-  max-width: 900px;
-  margin: 0 auto 32px;
+  max-width: 700px;
+  margin: 0 auto 42px;
   text-align: center;
 }
 
 .app-header h1 {
-  margin: 10;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: #9f0202;
+  margin: 0;
+  color: #e0f2fe;
+  font-size: 3.5rem;
 }
 
 .app-header p {
-  margin-top: 12px;
-  color: #3d0505;
-}
-
-.app-card{
-  max-width: 300;
-  margin: 0 auto;
-  padding: 28px;
-  background: black;
-  border: 1px solid rgb(51, 49, 49);
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+  margin: 30px auto 0;
+  color: #93c5fd;
 }
 
 .planner-card {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  padding: 28px;
-  background: white;
-  border: 1px solid #e5e7eb;
+  padding: 32px;
+  background: #1e293b;
+  border: 1px solid #334155;
   border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+  box-shadow: 0 18px 45px rgba(2, 6, 23, 0.35);
 }
 
 .planner-card h2 {
-  margin-top: 0;
-  color: #1f2937;
-}
-
-.planner-card p {
-  line-height: 1.6;
-  margin: 10px;
-}
-
-.primary-button {
-  margin-top: 16px;
-  padding: 5px 16px;
-  border: 0;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.primary-button:hover {
-  background: #1d4ed8;
-}
-
-.primary-button:focus-visible {
-  outline: 3px solid #93c5fd;
-  outline-offset: 3px;
+  margin: 0 0 20px;
+  color: #e0f2fe;
+  font-size: 1.4rem;
 }
 
 .primary-input {
-  margin-top: 16px;
-  margin-right: 1px;
-  padding: 5px 16px;
+  box-sizing: border-box;
+  width: min(100%, 460px);
+  padding: 12px 14px;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  outline: none;
+  background: #0f213e;
+  color: #e0f2fe;
+  font: inherit;
+}
+
+.primary-input::placeholder {
+  color: #94a3b8;
+}
+
+.primary-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.primary-button {
+  margin: 14px 0 0 8px;
+  padding: 12px 18px;
   border: 0;
   border-radius: 8px;
-  background: #1c2029;
-  color: white;
+  background: #38bdf8;
+  color: #082f49;
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #7dd3fc;
+  transform: translateY(-1px);
+}
+
+.primary-button:focus-visible {
+  outline: 3px solid #bae6fd;
+  outline-offset: 3px;
+}
+
+.site-header {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  text-align: center;
 }

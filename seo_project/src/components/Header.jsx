@@ -1,9 +1,10 @@
-export default function Header(){
-    return(
-        <header>
-            <h1>
-                Study Planner
-            </h1>
-        </header>
-    )
+import { NavLink } from 'react-router-dom'
+
+export default function Header( {children} ) {
+  return (
+    <header className="site-header">
+      <h1>Study Planner</h1>
+        {children}
+    </header>
+  )
 }

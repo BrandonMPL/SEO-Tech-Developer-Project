@@ -1,21 +1,28 @@
 import { useState } from 'react'
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 import './App.css'
-import Header from './components/Header'
-import SearchBooks from './components/Search'
+import Home from "./pages/Home"
+import SavedPlans from './pages/SavedPlans'
+
+
 function App() {
 
   return (
-    <main className="app">
-      <header className="app-header">
-        <h1>Study Planner</h1>
-          <p>You're best friend in creating your own personalized study plan.</p>
-      </header>
+    <BrowserRouter>
+      <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-      <section className="planner-card">
-        <SearchBooks />
+          <Route
+            path="/plans"
+            element={<SavedPlans />}
+          />
+      </Routes>
+    
+    </BrowserRouter>
 
-      </section>
-    </main>
   )
 }
 
