@@ -94,3 +94,57 @@ background-size: 32px 32px;
   margin: 0 auto 30px;
   text-align: center;
 }
+
+.view-plans-card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto 0;
+  padding: 24px 32px;
+  background: #172554;
+  border: 1px solid #334155;
+  border-radius: 16px;
+}
+
+.view-plans-card h2 {
+  margin: 0;
+  color: #e0f2fe;
+  font-size: 1.2rem;
+}
+
+.view-plans-card p {
+  margin: 8px 0 0;
+  color: #93c5fd;
+}
+
+.secondary-button {
+  padding: 11px 16px;
+  border: 1px solid #38bdf8;
+  border-radius: 8px;
+  color: #bae6fd;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.secondary-button:hover {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.back-link {
+  margin-top: 18px;
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #93c5fd;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: #e0f2fe;
+  text-decoration: underline;
+}
