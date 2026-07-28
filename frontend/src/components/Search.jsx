@@ -23,29 +23,64 @@ function SearchBooks(){
 
     const [selectedBooks, setSelectedBooks] = useState([]);
 
+    const [studyPlan, setStudyPlan] = useState(null)
+    const [savedMessage, setsavedMessage] = useState('')
+
     function searchBooks() {
         const searchTerm = search.trim().toLowerCase()
 
         const matchingBooks = mockBooks.filter((book) =>
             `${book.title} ${book.author}`.toLowerCase().includes(searchTerm)
         )
-  setBooks(matchingBooks)
-}
-
-function toggleBook(book) {
-    const isAlreadySelected = selectedBooks.some(
-        (selectedBook) => selectedBook.id === book.id
-    )
-
-    if (isAlreadySelected) {
-        setSelectedBooks(
-        selectedBooks.filter((selectedBook) => selectedBook.id !== book.id)
-        )
-        } else {
-        setSelectedBooks([...selectedBooks, book])
-        }
+    setBooks(matchingBooks)
     }
 
+    function toggleBook(book) {
+        const isAlreadySelected = selectedBooks.some(
+            (selectedBook) => selectedBook.id === book.id
+        )
+
+        if (isAlreadySelected) {
+            setSelectedBooks(
+            selectedBooks.filter((selectedBook) => selectedBook.id !== book.id)
+            )
+            } else {
+            setSelectedBooks([...selectedBooks, book])
+            }
+        }
+    
+    function generateStudyPlan(){
+        const selectedTitles = selectedBooks
+        .map((book)=>book.title).join(', ')
+
+        setStudyPlan({
+            title: `${search || 'Custom'} Study Plan`,
+            selectedTitles,
+            weeks: [
+                'Week 1: Read the introduction and first chapters.',
+        'Week 2: Take notes on the main concepts.',
+        'Week 3: Complete practice exercises or a small project.',
+        'Week 4: Review your notes and test your understanding.',
+            ],
+        })
+    }
+
+    function saveStudyPlan(){
+        const existingPlans = JSON.parse(
+            localStorage.getItem('savedStudyPlans') || '[]'
+        )
+        const planToSave = {
+            id: Date.now(),
+            ...studyPlan,
+            savedAT: new Date().toLocaleDateString(),
+        }
+        localStorage.setItem(
+            'savedStudyPlans',
+            JSON.stringify([...existingPlans, planToSave])
+        )
+        setsavedMessage('Study Plan Saved')
+    }
+    
     return (
         <>
         <h2>Search Topics to Study For:</h2>
@@ -89,6 +124,38 @@ function toggleBook(book) {
                 </p>
             )}
         </div>
+        )}
+
+        <button
+        className = "primary-button"
+        onClick={generateStudyPlan}
+        disabled={selectedBooks.length === 0}>
+            Generate Study Plan
+        </button>
+
+        {studyPlan && (
+            <section className='study-plan'>
+                <h3>
+                    {studyPlan.title}
+                </h3>
+                <p>
+                    Based on: {studyPlan.selectedTitles}
+                </p>
+                <ol>
+                    {studyPlan.weeks.map((week) =>
+                    (
+                        <li key={week}>{week}</li>
+                    ))}
+                </ol>
+
+                <button className='primary-button'
+                onClick={saveStudyPlan}>
+                    Save study plan
+                </button>
+                {savedMessage && (
+                    <p className='save-message'>{savedMessage}</p>
+                )}
+            </section>
         )}
         </>
     );
