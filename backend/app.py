@@ -2,7 +2,7 @@ from flask import Flask
 from dotenv import load_dotenv
 from google import genai
 
-from models import db, TestItem
+from models import db, SavedPlans
 from routes import routes
 
 load_dotenv()
