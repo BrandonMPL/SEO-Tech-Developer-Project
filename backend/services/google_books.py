@@ -1,57 +1,57 @@
 import os
 import requests
 
-GOOGLE_BOOKS_API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")
 GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes"
 
+# always pass a list of books in this format
 FALLBACK_BOOKS = [
     {
         "title": "Book of Proof",
-        "authors": ["Richard Hammack"],
+        "authors": ["Richard Hammack"]
     },
     {
         "title": "Mathematics for Computer Science",
-        "authors": ["Eric Lehman", "F. Thomson Leighton", "Albert R. Meyer"],
+        "authors": ["Eric Lehman", "F. Thomson Leighton", "Albert R. Meyer"]
     },
     {
         "title": "Introduction to Linear Algebra",
-        "authors": ["Gilbert Strang"],
+        "authors": ["Gilbert Strang"]
     },
     {
         "title": "Introduction to Probability",
-        "authors": ["Joseph K. Blitzstein", "Jessica Hwang"],
+        "authors": ["Joseph K. Blitzstein", "Jessica Hwang"]
     },
     {
         "title": "OpenStax Calculus Volume 1",
-        "authors": ["Gilbert Strang", "Edwin Herman"],
+        "authors": ["Gilbert Strang", "Edwin Herman"]
     },
     {
         "title": "OpenStax Calculus Volume 2",
-        "authors": ["Gilbert Strang", "Edwin Herman"],
+        "authors": ["Gilbert Strang", "Edwin Herman"]
     },
     {
         "title": "OpenStax Calculus Volume 3",
-        "authors": ["Gilbert Strang", "Edwin Herman"],
+        "authors": ["Gilbert Strang", "Edwin Herman"]
     },
     {
         "title": "How to Prove It",
-        "authors": ["Daniel J. Velleman"],
+        "authors": ["Daniel J. Velleman"]
     },
     {
         "title": "Concrete Mathematics",
-        "authors": ["Ronald L. Graham", "Donald E. Knuth", "Oren Patashnik"],
+        "authors": ["Ronald L. Graham", "Donald E. Knuth", "Oren Patashnik"]
     },
     {
         "title": "Linear Algebra Done Right",
-        "authors": ["Sheldon Axler"],
-    },
+        "authors": ["Sheldon Axler"]
+    }
 ]
 
 
 def get_books(keyword):
     params = {
         "q": keyword,
-        "key": GOOGLE_BOOKS_API_KEY,
+        "key": os.getenv("GOOGLE_BOOKS_API_KEY"),
         "maxResults": 10
     }
 
