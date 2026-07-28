@@ -2,6 +2,17 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class TestItem(db.Model):
+class SavedPlans(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
+    plan = db.Column(db.Text, nullable=False)
+    created_at = db.Column(
+        db.DateTime,
+        server_default=db.func.now(),
+        nullable=False,
+    )
+    updated_at = db.Column(
+        db.DateTime,
+        server_default=db.func.now(),
+        onupdate=db.func.now(),
+        nullable=False,
+    )
