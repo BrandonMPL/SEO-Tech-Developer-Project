@@ -23,46 +23,51 @@ function SearchBooks(){
 
     const [selectedBooks, setSelectedBooks] = useState([]);
 
-    const [studyPlan, setStudyPlan] = useState(null)
+    const [studyPlan, setStudyPlan] = useState("")
     const [savedMessage, setsavedMessage] = useState('')
 
-    function searchBooks() {
-        const searchTerm = search.trim().toLowerCase()
+    async function searchBooks() {
+        console.log("Search Clicked");
+        try {
+            const response = await fetch(
+                `http://localhost:8000/books?keyword=${encodeURIComponent(search)}`
+            );
 
-        const matchingBooks = mockBooks.filter((book) =>
-            `${book.title} ${book.author}`.toLowerCase().includes(searchTerm)
-        )
-    setBooks(matchingBooks)
+            const data = await response.json();
+
+            setBooks(data);
+        } catch(error) {
+            console.error(error);
+        }
     }
 
     function toggleBook(book) {
         const isAlreadySelected = selectedBooks.some(
-            (selectedBook) => selectedBook.id === book.id
+            (selectedBook) => selectedBook.title === book.title
         )
 
         if (isAlreadySelected) {
             setSelectedBooks(
-            selectedBooks.filter((selectedBook) => selectedBook.id !== book.id)
-            )
+            selectedBooks.filter((selectedBook) => selectedBook.title !== book.title)
+            );
             } else {
             setSelectedBooks([...selectedBooks, book])
             }
         }
     
-    function generateStudyPlan(){
-        const selectedTitles = selectedBooks
-        .map((book)=>book.title).join(', ')
-
-        setStudyPlan({
-            title: `${search || 'Custom'} Study Plan`,
-            selectedTitles,
-            weeks: [
-                'Week 1: Read the introduction and first chapters.',
-        'Week 2: Take notes on the main concepts.',
-        'Week 3: Complete practice exercises or a small project.',
-        'Week 4: Review your notes and test your understanding.',
-            ],
-        })
+    async function generateStudyPlan(){
+        const response = await fetch(
+            "http://localhost:8000/plans/new",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(selectedBooks)
+            }
+        );
+        const text = await response.text();
+        setStudyPlan(text);
     }
 
     function saveStudyPlan(){
@@ -101,18 +106,18 @@ function SearchBooks(){
 
                 {books.map((book) => {
                     const isSelected = selectedBooks.some(
-                        (selectedBook) => selectedBook.id === book.id)
+                        (selectedBook) => selectedBook.title === book.title)
 
                 return (
                     <label className={`book-result ${isSelected ? 'selected' : ''}`}
-                key={book.id}>
+                key={`${book.title}-${book.authors[0]}`}>
                 <input  type="checkbox"
                 checked={isSelected}
                 onChange={() => toggleBook(book)}/>
 
                 <div>
                     <h4>{book.title}</h4>
-                    <p>By {book.author}</p>
+                    <p>By {book.authors.join(", ")}</p>
                 </div>
             </label>
             )
