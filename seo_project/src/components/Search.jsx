@@ -1,25 +1,41 @@
 import { useState } from 'react'
 
+const mockBooks = [
+    {id: 'book-1',
+    title: 'Eloquent JavaScript',
+    author: 'Marijn Haverbeke',
+    },
+    {
+        id: 'book-2',
+        title: 'JavaScript: The Good Parts',
+        author: 'Douglas Crockford',
+    },
+    {
+        id: 'book-3',
+        title: 'You Don’t Know JS Yet',
+        author: 'Kyle Simpson',
+    },
+]
+
 function SearchBooks(){
     const [search, setSearch] = useState("");
     const [books, setBooks] = useState([]);
 
     const [selectedBooks, setSelectedBooks] = useState([]);
 
-    async function searchBooks(){
-        const response = await fetch("http://localhost:8000/search",{
-            method: "POST",
-            headers: { 
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                    search:search,
-                })
-        });
+    function searchBooks() {
+    const searchTerm = search.trim().toLowerCase()
 
-        const data = await response.json();
-        setBooks(data.books);
-    }
+    const matchingBooks = mockBooks.filter((book) =>
+        `${book.title} ${book.author}`.toLowerCase().includes(searchTerm)
+    )
+
+
+
+
+
+  setBooks(matchingBooks)
+}
 
     return (
         <>
@@ -31,9 +47,23 @@ function SearchBooks(){
         className="primary-input"
         />
 
-        <button className="primary-button">
+        <button className="primary-button" onClick={searchBooks}>
             Search
         </button>
+
+        {books.length > 0 && (
+            <div >
+                <h3>Suggested Books</h3>
+
+                {books.map((book) => (
+                    <article key={book.id}>
+                        <h4>{book.title}</h4>
+                        <p>By {book.author}</p>
+                    </article>
+                ))}
+            </div>
+        )
+        }
         </>
     );
 }

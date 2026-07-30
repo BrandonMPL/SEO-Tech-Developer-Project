@@ -148,3 +148,37 @@ background-size: 32px 32px;
   color: #e0f2fe;
   text-decoration: underline;
 }
+
+.book-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-result:hover {
+  border-color: #38bdf8;
+}
+
+.book-result.selected {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.book-result h4,
+.book-result p {
+  margin: 0;
+}
+
+.book-result h4 {
+  color: #e0f2fe;
+}
+
+.book-result p,
+.selection-count {
+  color: #93c5fd;
+}
