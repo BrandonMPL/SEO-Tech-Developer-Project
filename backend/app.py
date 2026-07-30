@@ -15,6 +15,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db.init_app(app)
 
 app.extensions["gemini"] = genai.Client()
+
 app.register_blueprint(routes)
 
 if __name__ == "__main__":
