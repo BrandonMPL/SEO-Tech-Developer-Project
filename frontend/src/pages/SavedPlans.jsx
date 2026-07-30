@@ -38,7 +38,7 @@ function SavedPlans(){
 
     return(
         <>
-        <main className="app plans-page">
+        <main className="app">
             <header className="app-header">
                 <h1>Saved Study Plans</h1>
                 <p>Review the plans you have created</p>

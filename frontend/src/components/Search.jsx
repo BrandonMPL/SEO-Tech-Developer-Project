@@ -26,7 +26,14 @@ function SearchBooks(){
     const [studyPlan, setStudyPlan] = useState("")
     const [savedMessage, setsavedMessage] = useState('')
 
+    function clearResults(){
+        setBooks([]);
+        setSelectedBooks([]);
+        setStudyPlan(null);
+    }
+
     async function searchBooks() {
+        clearResults();
         console.log("Search Clicked");
         try {
             const response = await fetch(
@@ -56,6 +63,7 @@ function SearchBooks(){
         }
     
     async function generateStudyPlan(){
+        setsavedMessage("");
         const response = await fetch(
             "http://localhost:8000/plans/new",
             {
@@ -93,6 +101,11 @@ function SearchBooks(){
         } catch(error){
             console.error("Error saving study plan:", error);
         }
+    }
+
+    function resetSearch(){
+        clearResults();
+        setSearch("");
     }
 
     return (
@@ -162,6 +175,11 @@ function SearchBooks(){
                 <button className='primary-button'
                 onClick={saveStudyPlan}>
                     Save study plan
+                </button>
+
+                <button className='primary-button'
+                onClick={resetSearch}>
+                    New Search
                 </button>
 
                 {savedMessage && (
