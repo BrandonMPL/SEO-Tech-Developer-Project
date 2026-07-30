@@ -40,10 +40,6 @@ function SavedPlans(){
         <>
         <main className="app plans-page">
             <header className="app-header">
-                <Link className="back-link" to="/">
-                    Back to Search
-                </Link>
-
                 <h1>Saved Study Plans</h1>
                 <p>Review the plans you have created</p>
             </header>
@@ -79,6 +75,10 @@ function SavedPlans(){
                 )}
 
             </section>
+
+            <Link className="back-link" to="/">
+                Back to Search
+            </Link>
         </main>
         </>
 
