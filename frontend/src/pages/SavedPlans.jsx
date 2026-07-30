@@ -1,10 +1,41 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 
 function SavedPlans(){
-    const [plans] = useState(() => {
-        return JSON.parse(localStorage.getItem('savedStudyPlans') || '[]')
-    })
+    const [plans, setPlans] = useState([]);
+
+    useEffect(() => {
+        async function loadPlans(){
+            try {
+                const response = await fetch("http://localhost:8000/plans");
+                const data = await response.json();
+
+                setPlans(data);
+            }   catch(error) {
+                console.error("Error loading plans;", error);
+            }
+        }
+        loadPlans();
+    }, []);
+
+    async function deletePlan(id){
+        try{
+            const response = await fetch(
+                `http://localhost:8000/plans/${id}`,
+            {
+                method: "DELETE",
+            }
+        );
+        if (!response.ok){
+            throw new Error("Failed to delete");
+        }
+
+            setPlans(plans.filter(plan => plan.id !== id));
+        } catch (error){
+            console.error(error);
+        }
+    }
+
     return(
         <>
         <main className="app plans-page">
@@ -28,18 +59,21 @@ function SavedPlans(){
                     plans.map((plan) => (
                         <article className = "saved-plan-card"
                         key={plan.id}>
-                        <p className="saved-date">Saved</p>
-                        <h2> {plan.title}</h2>
-                        <p>Based on: {plan.selectedTitles}</p>
+                        <p className="saved-date">
+                            Saved at
+                            {"  "}
+                            {new Date(plan.createdAt).toLocaleString()}
+                        </p>
+                        <pre>{plan.plan}</pre>
 
-                        <ol>
-                            {plan.weeks.map((week) =>(
-                                <li key={week}>{week}</li>
-                            ))}
-                        </ol>
+                            <button className='primary-button'
+                            onClick={() => deletePlan(plan.id)}>
+                            Delete
+                            </button>
                         </article>
                     ))
                 )}
+
             </section>
         </main>
         </>

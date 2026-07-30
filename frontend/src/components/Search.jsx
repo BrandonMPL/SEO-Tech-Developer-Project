@@ -70,22 +70,31 @@ function SearchBooks(){
         setStudyPlan(text);
     }
 
-    function saveStudyPlan(){
-        const existingPlans = JSON.parse(
-            localStorage.getItem('savedStudyPlans') || '[]'
-        )
-        const planToSave = {
-            id: Date.now(),
-            ...studyPlan,
-            savedAT: new Date().toLocaleDateString(),
+    async function saveStudyPlan(){
+        try {
+            const response = await fetch(
+                "http://localhost:8000/plans/save",
+                {
+                    method:"POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        text: studyPlan,
+                    }),
+                }
+            );
+
+            if (!response.ok){
+                throw new Error("Failed to save study plan");
+            }
+
+            setsavedMessage("Study Plan Saved");
+        } catch(error){
+            console.error("Error saving study plan:", error);
         }
-        localStorage.setItem(
-            'savedStudyPlans',
-            JSON.stringify([...existingPlans, planToSave])
-        )
-        setsavedMessage('Study Plan Saved')
     }
-    
+
     return (
         <>
         <h2>Search Topics to Study For:</h2>
@@ -141,22 +150,16 @@ function SearchBooks(){
         {studyPlan && (
             <section className='study-plan'>
                 <h3>
-                    {studyPlan.title}
+                    Your Study Plan
                 </h3>
-                <p>
-                    Based on: {studyPlan.selectedTitles}
-                </p>
-                <ol>
-                    {studyPlan.weeks.map((week) =>
-                    (
-                        <li key={week}>{week}</li>
-                    ))}
-                </ol>
+
+                <pre>{studyPlan}</pre>
 
                 <button className='primary-button'
                 onClick={saveStudyPlan}>
                     Save study plan
                 </button>
+
                 {savedMessage && (
                     <p className='save-message'>{savedMessage}</p>
                 )}
