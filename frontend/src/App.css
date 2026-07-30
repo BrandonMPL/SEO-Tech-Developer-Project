@@ -209,6 +209,15 @@ background-size: 32px 32px;
 .study-plan li {
   margin-top: 10px;
 }
+
+.study-plan-text {
+    line-height: 1.6;
+}
+
+.study-plan-text p {
+    margin-bottom: 0.75rem;
+}
+
 .save-message {
   margin: 14px 0 0;
   color: #86efac;

@@ -64,7 +64,11 @@ function SavedPlans(){
                             {"  "}
                             {new Date(plan.createdAt).toLocaleString()}
                         </p>
-                        <pre>{plan.plan}</pre>
+                        <div className='study-plan-text'>
+                            {plan.plan.split("\n").map((line,index)=> (
+                                line.trim() !== "" && <p key={index}>{line}</p>
+                            ))}
+                        </div>
 
                             <button className='primary-button'
                             onClick={() => deletePlan(plan.id)}>

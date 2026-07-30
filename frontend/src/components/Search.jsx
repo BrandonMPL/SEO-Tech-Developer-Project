@@ -153,7 +153,11 @@ function SearchBooks(){
                     Your Study Plan
                 </h3>
 
-                <pre>{studyPlan}</pre>
+                <div className='study-plan-text'>
+                    {studyPlan.split("\n").map((line,index)=> (
+                        line.trim() !== "" && <p key={index}>{line}</p>
+                    ))}
+                </div>
 
                 <button className='primary-button'
                 onClick={saveStudyPlan}>
